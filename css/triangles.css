@@ -1,0 +1,47 @@
+/* Triángulos cayendo - MÁS GRANDES Y RÁPIDOS */
+.triangles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid white;
+    filter: drop-shadow(0 0 8px white) drop-shadow(0 0 15px white);
+    opacity: 0.8;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes naturalFall {
+    0% {
+        transform: translateY(-150px) translateX(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(calc(100vh + 150px)) translateX(calc((var(--random-x) - 0.5) * 300px)) rotate(calc(var(--random-rotate) * 720deg));
+        opacity: 0;
+    }
+}
+
+.triangle.fast {
+    animation-duration: 0.8s !important;
+}
+
+.triangle.medium {
+    animation-duration: 1.2s !important;
+}
+
+.triangle.slow {
+    animation-duration: 1.8s !important;
+}

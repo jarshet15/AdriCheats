@@ -1,0 +1,624 @@
+@font-face {
+    font-family: 'Road Rage';
+    src: url('../assets/fonts/Road_Rage.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 0, 51, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 51, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+    animation: phonkVignette 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+@keyframes phonkVignette {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+}
+.music-activator {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 51, 0.9);
+    color: white;
+    border-radius: 10px;
+    padding: 12px 25px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(255, 0, 51, 0.4);
+    animation: activatorPulse 2s infinite;
+    transition: all 0.5s ease;
+}
+@keyframes activatorPulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.4);
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        box-shadow: 0 6px 25px rgba(255, 0, 51, 0.6);
+        transform: translateX(-50%) scale(1.02);
+    }
+}
+.activator-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.activator-icon {
+    font-size: 1.3rem;
+    animation: iconBeat 1.5s infinite;
+}
+@keyframes iconBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+.activator-text {
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 30px 20px;
+}
+.logo-container {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+.logo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    filter: brightness(0.9) contrast(1.1); 
+    position: relative;
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.4); 
+}
+.logo:hover {
+    transform: scale(1.05); 
+    filter: brightness(1) contrast(1.1);
+    box-shadow: 0 0 20px rgba(255, 0, 51, 0.6);
+}
+.title-container {
+    margin-bottom: 15px;
+}
+.title {
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'Road Rage', sans-serif;
+    animation: titleAppear 0.8s ease-out, titleColorChange 8s linear infinite;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+@keyframes titleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes titleColorChange {
+    0% {
+        text-shadow: 
+            0 0 10px #ff0033,
+            0 0 20px #ff0033,
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    25% {
+        text-shadow: 
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        text-shadow: 
+            0 0 10px #ffff00,
+            0 0 20px #ffff00,
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    75% {
+        text-shadow: 
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    100% {
+        text-shadow: 
+            0 0 10px #ff0033,
+            0 0 20px #ff0033,
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+}
+.adri {
+    color: #ff0033;
+    animation: adriColorChange 8s linear infinite;
+    display: inline-block;
+}
+.cheats {
+    color: #ffffff;
+    animation: cheatsColorChange 8s linear infinite;
+    display: inline-block;
+    margin-left: -2px;
+}
+@keyframes adriColorChange {
+    0% { color: #ff0033; }
+    25% { color: #00ffff; }
+    50% { color: #ffff00; }
+    75% { color: #ff00ff; }
+    100% { color: #ff0033; }
+}
+@keyframes cheatsColorChange {
+    0% { 
+        color: #ffffff;
+        text-shadow: 
+            0 0 10px #ffffff,
+            0 0 20px #ffffff;
+    }
+    25% { 
+        color: #ccccff;
+        text-shadow: 
+            0 0 10px #ccccff,
+            0 0 20px #ccccff;
+    }
+    50% { 
+        color: #ffffcc;
+        text-shadow: 
+            0 0 10px #ffffcc,
+            0 0 20px #ffffcc;
+    }
+    75% { 
+        color: #ffccff;
+        text-shadow: 
+            0 0 10px #ffccff,
+            0 0 20px #ffccff;
+    }
+    100% { 
+        color: #ffffff;
+        text-shadow: 
+            0 0 10px #ffffff,
+            0 0 20px #ffffff;
+    }
+}
+.subtitle {
+    font-size: 1.1rem;
+    color: #888;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+    animation: subtitlePulse 4s ease-in-out infinite;
+}
+@keyframes subtitlePulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.download-section {
+    width: 100%;
+    margin-bottom: 50px;
+}
+.download-title {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: titleFlicker 5s ease-in-out infinite;
+}
+@keyframes titleFlicker {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+.download-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.download-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 0;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: buttonBreathe 6s ease-in-out infinite;
+}
+@keyframes buttonBreathe {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.2);
+    }
+}
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 51, 0.1), transparent);
+    transition: left 0.6s;
+}
+.download-btn:hover::before {
+    left: 100%;
+}
+.download-btn:hover {
+    transform: translateY(-2px);
+    border-color: #ff0033;
+    box-shadow: 0 6px 20px rgba(255, 0, 51, 0.4);
+    animation: buttonHover 0.3s ease-out;
+}
+@keyframes buttonHover {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(-2px);
+    }
+}
+.btn-content {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    position: relative;
+    z-index: 2;
+}
+.btn-emoji {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+    animation: emojiPulse 4s ease-in-out infinite;
+}
+@keyframes emojiPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+.download-btn:hover .btn-emoji {
+    transform: scale(1.2) rotate(10deg);
+    animation: emojiHover 0.5s ease-out;
+}
+@keyframes emojiHover {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.3) rotate(15deg);
+    }
+    100% {
+        transform: scale(1.2) rotate(10deg);
+    }
+}
+.btn-text {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #fff;
+}
+.btn-badge {
+    background: linear-gradient(135deg, #ff0033 0%, #cc0029 100%);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+    animation: badgeGlow 3s ease-in-out infinite;
+}
+@keyframes badgeGlow {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+    }
+    50% {
+        box-shadow: 0 2px 12px rgba(255, 0, 51, 0.6);
+    }
+}
+.download-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff0033, transparent) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.download-btn:hover::after {
+    opacity: 1;
+}
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 30px 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #222;
+    width: 100%;
+    position: relative;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff0033, transparent);
+    animation: footerScan 3s linear infinite;
+}
+@keyframes footerScan {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+.footer p:first-child {
+    margin-bottom: 8px;
+    color: #888;
+}
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+.social-link {
+    color: #666;
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    animation: socialPulse 8s ease-in-out infinite;
+}
+.social-link:nth-child(1) { animation-delay: 0s; }
+.social-link:nth-child(2) { animation-delay: 1s; }
+.social-link:nth-child(3) { animation-delay: 2s; }
+.social-link:nth-child(4) { animation-delay: 3s; }
+@keyframes socialPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+.social-link:hover {
+    color: #ff0033;
+    transform: translateY(-2px) scale(1.2);
+    animation: socialHover 0.5s ease-out;
+}
+@keyframes socialHover {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+.fa-whatsapp:hover {
+    color: #25D366 !important;
+}
+.platform-section {
+    margin-bottom: 40px;
+}
+.platform-title {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    animation: platformGlow 4s ease-in-out infinite;
+}
+.android-title {
+    background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, transparent 100%);
+    color: #3DDC84;
+    border: 1px solid rgba(61, 220, 132, 0.3);
+}
+.pc-title {
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, transparent 100%);
+    color: #007AFF;
+    border: 1px solid rgba(0, 122, 255, 0.3);
+}
+@keyframes platformGlow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.3);
+    }
+}
+.fa-android {
+    color: #3DDC84;
+    animation: androidPulse 3s ease-in-out infinite;
+}
+.fa-desktop {
+    color: #007AFF;
+    animation: desktopPulse 3s ease-in-out infinite;
+}
+@keyframes androidPulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    50% {
+        transform: scale(1.05) rotate(-5deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(3deg);
+    }
+}
+@keyframes desktopPulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 15px rgba(0, 122, 255, 0.8);
+    }
+}
+.btn-badge[data-badge="NO ROOT"] {
+    background: linear-gradient(135deg, #FF6B35, #FF8E53);
+}
+.btn-badge[data-badge="SEGURO"] {
+    background: linear-gradient(135deg, #00C851, #007E33);
+}
+.btn-badge[data-badge="NUEVO"] {
+    background: linear-gradient(135deg, #FF4081, #F50057);
+}
+.btn-badge[data-badge="LAG"] {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+}
+.btn-badge[data-badge="PREMIUM"] {
+    background: linear-gradient(135deg, #FFD700, #FFC400);
+    color: #000;
+}
+.btn-badge[data-badge="BASIC"] {
+    background: linear-gradient(135deg, #78909C, #546E7A);
+}
+.btn-badge[data-badge="BYPASS"] {
+    background: linear-gradient(135deg, #FF3D00, #DD2C00);
+}
+@media (max-width: 600px) {
+    .title {
+        font-size: 2.2rem;
+    }
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+    .music-activator {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    .activator-text {
+        font-size: 0.8rem;
+    }
+    .btn-content {
+        padding: 14px 16px;
+    }
+    .btn-emoji {
+        font-size: 1.3rem;
+        margin-right: 12px;
+    }
+    .btn-text {
+        font-size: 0.9rem;
+    }
+    .btn-badge {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+    .social-links {
+        gap: 20px;
+    }
+    .social-link {
+        font-size: 1.4rem;
+    }
+    .platform-title {
+        font-size: 1.4rem;
+        padding: 10px;
+    }
+}
