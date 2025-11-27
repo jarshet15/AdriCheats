@@ -622,3 +622,47 @@ body::before {
         padding: 10px;
     }
 }
+/* --- OPTIMIZACIÓN AGRESIVA PARA MÓVILES --- */
+@media (max-width: 768px) {
+    
+    /* 1. Desactivar animaciones de fondo pesadas */
+    body::before {
+        animation: none !important; /* Detiene el movimiento del fondo */
+        background: radial-gradient(circle at 50% 50%, rgba(255, 0, 51, 0.05), transparent 70%) !important; /* Fondo estático simple */
+    }
+
+    /* 2. Eliminar el efecto de vidrio (Backdrop Filter) - Causa mucho lag */
+    .music-activator {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255, 0, 51, 0.95) !important; /* Color sólido un poco más opaco */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+        animation: none !important; /* Quitar el pálpito del botón */
+    }
+
+    /* 3. Detener animaciones de sombras (Box-Shadow) en botones */
+    .download-btn, 
+    .platform-title, 
+    .btn-badge,
+    .logo {
+        animation: none !important; /* Detiene el "respiro" de las sombras */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.4) !important; /* Sombra fija y ligera */
+        transition: transform 0.2s ease !important; /* Solo animar movimiento, no sombras */
+    }
+    
+    /* 4. Simplificar el título neón */
+    .title, .adri, .cheats {
+        animation: titleColorChange 8s linear infinite !important; /* Mantenemos el color... */
+        text-shadow: 0 0 10px currentColor !important; /* ...pero simplificamos la sombra a una sola capa */
+    }
+    
+    /* 5. Optimizar iconos */
+    .activator-icon, .btn-emoji, .social-link, .fa-android, .fa-desktop {
+        animation: none !important; /* Detener movimiento constante de iconos */
+    }
+
+    /* 6. Optimización de renderizado */
+    * {
+        text-rendering: optimizeSpeed !important;
+    }
+}
