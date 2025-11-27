@@ -1,339 +1,238 @@
 @font-face {
     font-family: 'Road Rage';
     src: url('../assets/fonts/Road_Rage.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
     font-display: swap;
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
+
 body {
-    background-color: #0a0a0a;
+    background-color: #050505;
     color: #f0f0f0;
     min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    justify-content: center;
     overflow-x: hidden;
-    position: relative;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
 }
+
+/* Fondo estático sutil */
 body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 0, 51, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 0, 51, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-    animation: phonkVignette 8s ease-in-out infinite;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 10%, rgba(255, 0, 51, 0.1), transparent 60%);
     pointer-events: none;
     z-index: -1;
 }
-@keyframes phonkVignette {
-    0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.02);
-    }
-}
+
 .container {
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
-    margin: 0 auto;
     z-index: 1;
     position: relative;
 }
-.music-activator {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 0, 51, 0.9);
-    color: white;
-    border-radius: 10px;
-    padding: 12px 25px;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Segoe UI', sans-serif;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 20px rgba(255, 0, 51, 0.4);
-    animation: activatorPulse 2s infinite;
-    transition: all 0.5s ease;
-}
-@keyframes activatorPulse {
-    0%, 100% {
-        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.4);
-        transform: translateX(-50%) scale(1);
-    }
-    50% {
-        box-shadow: 0 6px 25px rgba(255, 0, 51, 0.6);
-        transform: translateX(-50%) scale(1.02);
-    }
-}
-.activator-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.activator-icon {
-    font-size: 1.3rem;
-    animation: iconBeat 1.5s infinite;
-}
-@keyframes iconBeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-.activator-text {
-    font-size: 0.9rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
+
+/* --- HEADER Y LOGO --- */
 .header {
     text-align: center;
-    margin-bottom: 50px;
-    padding: 30px 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
 }
-.logo-container {
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
-}
+
 .logo {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
-    transition: all 0.3s ease;
-    filter: brightness(0.9) contrast(1.1); 
-    position: relative;
-    box-shadow: 0 0 15px rgba(255, 0, 51, 0.4); 
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(255, 0, 51, 0.25);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
 }
-.logo:hover {
-    transform: scale(1.05); 
-    filter: brightness(1) contrast(1.1);
-    box-shadow: 0 0 20px rgba(255, 0, 51, 0.6);
+
+.logo:active {
+    transform: scale(0.95);
 }
+
 .title-container {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
+
+/* --- TÍTULO PRINCIPAL (RGB) --- */
 .title {
     font-size: 2.8rem;
     letter-spacing: 2px;
     font-weight: normal;
     text-transform: uppercase;
-    margin-bottom: 10px;
     font-family: 'Road Rage', sans-serif;
-    animation: titleAppear 0.8s ease-out, titleColorChange 8s linear infinite;
     line-height: 1.1;
     white-space: nowrap;
+    will-change: text-shadow, color; 
 }
-@keyframes titleAppear {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-@keyframes titleColorChange {
-    0% {
-        text-shadow: 
-            0 0 10px #ff0033,
-            0 0 20px #ff0033,
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-    25% {
-        text-shadow: 
-            0 0 10px #00ffff,
-            0 0 20px #00ffff,
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-    50% {
-        text-shadow: 
-            0 0 10px #ffff00,
-            0 0 20px #ffff00,
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-    75% {
-        text-shadow: 
-            0 0 10px #ff00ff,
-            0 0 20px #ff00ff,
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-    100% {
-        text-shadow: 
-            0 0 10px #ff0033,
-            0 0 20px #ff0033,
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-}
+
+/* ADRI y CHEATS sincronizados (SIN CAJA ATRÁS) */
 .adri {
     color: #ff0033;
     animation: adriColorChange 8s linear infinite;
     display: inline-block;
 }
+
 .cheats {
     color: #ffffff;
     animation: cheatsColorChange 8s linear infinite;
     display: inline-block;
     margin-left: -2px;
 }
+
+/* --- ANIMACIÓN 1: SOLO TEXTO Y LÍNEAS (LIMPIA) --- */
+/* Esta la usan: ADRI, CHEATS y los Títulos de Plataforma */
 @keyframes adriColorChange {
-    0% { color: #ff0033; }
-    25% { color: #00ffff; }
-    50% { color: #ffff00; }
-    75% { color: #ff00ff; }
-    100% { color: #ff0033; }
-}
-@keyframes cheatsColorChange {
     0% { 
-        color: #ffffff;
-        text-shadow: 
-            0 0 10px #ffffff,
-            0 0 20px #ffffff;
+        color: #ff0033; 
+        text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+        border-color: #ff0033; /* Para la línea divisora */
     }
     25% { 
-        color: #ccccff;
-        text-shadow: 
-            0 0 10px #ccccff,
-            0 0 20px #ccccff;
+        color: #00ffff; 
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+        border-color: #00ffff;
     }
     50% { 
-        color: #ffffcc;
-        text-shadow: 
-            0 0 10px #ffffcc,
-            0 0 20px #ffffcc;
+        color: #ffff00; 
+        text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00;
+        border-color: #ffff00;
     }
     75% { 
-        color: #ffccff;
-        text-shadow: 
-            0 0 10px #ffccff,
-            0 0 20px #ffccff;
+        color: #ff00ff; 
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+        border-color: #ff00ff;
     }
     100% { 
-        color: #ffffff;
-        text-shadow: 
-            0 0 10px #ffffff,
-            0 0 20px #ffffff;
+        color: #ff0033; 
+        text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+        border-color: #ff0033;
     }
 }
+
+@keyframes cheatsColorChange {
+    0% { color: #ffffff; text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; }
+    25% { color: #ccccff; text-shadow: 0 0 10px #ccccff, 0 0 20px #ccccff; }
+    50% { color: #ffffcc; text-shadow: 0 0 10px #ffffcc, 0 0 20px #ffffcc; }
+    75% { color: #ffccff; text-shadow: 0 0 10px #ffccff, 0 0 20px #ffccff; }
+    100% { color: #ffffff; text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; }
+}
+
+/* --- ANIMACIÓN 2: SOLO PARA ETIQUETAS (CON CAJA Y SOMBRA) --- */
+/* Esta incluye el box-shadow y el fondo oscuro */
+@keyframes badgeColorChange {
+    0% { 
+        color: #ff0033; 
+        border-color: #ff0033;
+        box-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
+    }
+    25% { 
+        color: #00ffff; 
+        border-color: #00ffff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+    50% { 
+        color: #ffff00; 
+        border-color: #ffff00;
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.4);
+    }
+    75% { 
+        color: #ff00ff; 
+        border-color: #ff00ff;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+    100% { 
+        color: #ff0033; 
+        border-color: #ff0033;
+        box-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
+    }
+}
+
 .subtitle {
-    font-size: 1.1rem;
-    color: #888;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    color: #999;
     font-weight: 300;
-    animation: subtitlePulse 4s ease-in-out infinite;
 }
-@keyframes subtitlePulse {
-    0%, 100% {
-        opacity: 0.7;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-.download-section {
-    width: 100%;
-    margin-bottom: 50px;
-}
-.download-title {
+
+/* --- SECCIONES --- */
+.download-section { width: 100%; margin-bottom: 40px; }
+
+/* TÍTULOS DE PLATAFORMA (RGB SINCRONIZADO, SOLO TEXTO) */
+.platform-title {
     text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 30px;
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin: 30px 0 20px 0;
+    font-weight: 700;
     letter-spacing: 1px;
-    animation: titleFlicker 5s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    padding-bottom: 10px;
+    
+    /* Usamos la animación de TEXTO (la limpia) */
+    animation: adriColorChange 8s linear infinite;
 }
-@keyframes titleFlicker {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.02);
-    }
+
+/* LÍNEA DIVISORA CORTA Y DIFUMINADA */
+.platform-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px; /* Corta */
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0.8;
 }
+
 .download-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
+/* --- BOTONES (PLOMO MÁS OSCURO) --- */
 .download-btn {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    border: 1px solid #333;
+    /* Gradiente muy oscuro (Casi negro a gris muy oscuro) */
+    background: linear-gradient(135deg, #0a0a0a 0%, #161616 100%);
+    border: 1px solid #2a2a2a; 
     border-radius: 12px;
-    padding: 0;
-    color: #ffffff;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
     position: relative;
     overflow: hidden;
-    animation: buttonBreathe 6s ease-in-out infinite;
+    transition: all 0.2s ease;
+    
+    /* Sombra negra profunda */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
-@keyframes buttonBreathe {
-    0%, 100% {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-    50% {
-        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.2);
-    }
+
+.download-btn:active {
+    transform: scale(0.98);
+    background: #000;
 }
+
+/* Brillo superior "cristal" muy sutil */
 .download-btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 51, 0.1), transparent);
-    transition: left 0.6s;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
 }
-.download-btn:hover::before {
-    left: 100%;
-}
-.download-btn:hover {
-    transform: translateY(-2px);
-    border-color: #ff0033;
-    box-shadow: 0 6px 20px rgba(255, 0, 51, 0.4);
-    animation: buttonHover 0.3s ease-out;
-}
-@keyframes buttonHover {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-3px);
-    }
-    100% {
-        transform: translateY(-2px);
-    }
-}
+
 .btn-content {
     display: flex;
     align-items: center;
@@ -341,328 +240,67 @@ body::before {
     position: relative;
     z-index: 2;
 }
+
 .btn-emoji {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-right: 15px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: transform 0.3s ease;
-    animation: emojiPulse 4s ease-in-out infinite;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
 }
-@keyframes emojiPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-.download-btn:hover .btn-emoji {
-    transform: scale(1.2) rotate(10deg);
-    animation: emojiHover 0.5s ease-out;
-}
-@keyframes emojiHover {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    50% {
-        transform: scale(1.3) rotate(15deg);
-    }
-    100% {
-        transform: scale(1.2) rotate(10deg);
-    }
-}
+
 .btn-text {
     flex-grow: 1;
     font-weight: 500;
     font-size: 1rem;
-    color: #fff;
+    color: #ddd; 
 }
+
+/* --- ETIQUETAS (BADGES) CON ANIMACIÓN PROPIA --- */
 .btn-badge {
-    background: linear-gradient(135deg, #ff0033 0%, #cc0029 100%);
-    color: #ffffff;
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
-    animation: badgeGlow 3s ease-in-out infinite;
+    
+    /* ESTILO NEÓN RGB */
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+    border: 1px solid; 
+    
+    /* AQUÍ USAMOS LA ANIMACIÓN 2 (LA QUE TIENE CAJA Y SOMBRA) */
+    animation: badgeColorChange 8s linear infinite;
 }
-@keyframes badgeGlow {
-    0%, 100% {
-        box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
-    }
-    50% {
-        box-shadow: 0 2px 12px rgba(255, 0, 51, 0.6);
-    }
-}
-.download-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ff0033, transparent) border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-.download-btn:hover::after {
-    opacity: 1;
-}
+
+/* --- FOOTER --- */
 .footer {
     text-align: center;
-    margin-top: 60px;
-    padding: 30px 20px;
-    color: #666;
-    font-size: 0.9rem;
-    border-top: 1px solid #222;
-    width: 100%;
-    position: relative;
+    margin-top: 50px;
+    padding: 20px;
+    color: #555;
+    font-size: 0.85rem;
+    border-top: 1px solid #1a1a1a;
 }
-.footer::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ff0033, transparent);
-    animation: footerScan 3s linear infinite;
-}
-@keyframes footerScan {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-.footer p:first-child {
-    margin-bottom: 8px;
-    color: #888;
-}
+
 .social-links {
     display: flex;
     justify-content: center;
     gap: 25px;
     margin-top: 20px;
 }
+
 .social-link {
     color: #666;
     font-size: 1.6rem;
-    transition: all 0.3s ease;
+    transition: color 0.2s, transform 0.2s;
     text-decoration: none;
-    animation: socialPulse 8s ease-in-out infinite;
 }
-.social-link:nth-child(1) { animation-delay: 0s; }
-.social-link:nth-child(2) { animation-delay: 1s; }
-.social-link:nth-child(3) { animation-delay: 2s; }
-.social-link:nth-child(4) { animation-delay: 3s; }
-@keyframes socialPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
+
 .social-link:hover {
     color: #ff0033;
-    transform: translateY(-2px) scale(1.2);
-    animation: socialHover 0.5s ease-out;
+    transform: translateY(-3px);
 }
-@keyframes socialHover {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.3);
-    }
-    100% {
-        transform: scale(1.2);
-    }
-}
-.fa-whatsapp:hover {
-    color: #25D366 !important;
-}
-.platform-section {
-    margin-bottom: 40px;
-}
-.platform-title {
-    text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px;
-    border-radius: 10px;
-    animation: platformGlow 4s ease-in-out infinite;
-}
-.android-title {
-    background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, transparent 100%);
-    color: #3DDC84;
-    border: 1px solid rgba(61, 220, 132, 0.3);
-}
-.pc-title {
-    background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, transparent 100%);
-    color: #007AFF;
-    border: 1px solid rgba(0, 122, 255, 0.3);
-}
-@keyframes platformGlow {
-    0%, 100% {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    50% {
-        box-shadow: 0 4px 20px rgba(255, 0, 51, 0.3);
-    }
-}
-.fa-android {
-    color: #3DDC84;
-    animation: androidPulse 3s ease-in-out infinite;
-}
-.fa-desktop {
-    color: #007AFF;
-    animation: desktopPulse 3s ease-in-out infinite;
-}
-@keyframes androidPulse {
-    0%, 100% {
-        transform: scale(1) rotate(0deg);
-    }
-    25% {
-        transform: scale(1.1) rotate(5deg);
-    }
-    50% {
-        transform: scale(1.05) rotate(-5deg);
-    }
-    75% {
-        transform: scale(1.1) rotate(3deg);
-    }
-}
-@keyframes desktopPulse {
-    0%, 100% {
-        transform: scale(1);
-        text-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
-    }
-    50% {
-        transform: scale(1.1);
-        text-shadow: 0 0 15px rgba(0, 122, 255, 0.8);
-    }
-}
-.btn-badge[data-badge="NO ROOT"] {
-    background: linear-gradient(135deg, #FF6B35, #FF8E53);
-}
-.btn-badge[data-badge="SEGURO"] {
-    background: linear-gradient(135deg, #00C851, #007E33);
-}
-.btn-badge[data-badge="NUEVO"] {
-    background: linear-gradient(135deg, #FF4081, #F50057);
-}
-.btn-badge[data-badge="LAG"] {
-    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
-}
-.btn-badge[data-badge="PREMIUM"] {
-    background: linear-gradient(135deg, #FFD700, #FFC400);
-    color: #000;
-}
-.btn-badge[data-badge="BASIC"] {
-    background: linear-gradient(135deg, #78909C, #546E7A);
-}
-.btn-badge[data-badge="BYPASS"] {
-    background: linear-gradient(135deg, #FF3D00, #DD2C00);
-}
+
 @media (max-width: 600px) {
-    .title {
-        font-size: 2.2rem;
-    }
-    .logo {
-        width: 100px;
-        height: 100px;
-    }
-    .music-activator {
-        padding: 10px 20px;
-        font-size: 0.8rem;
-    }
-    .activator-text {
-        font-size: 0.8rem;
-    }
-    .btn-content {
-        padding: 14px 16px;
-    }
-    .btn-emoji {
-        font-size: 1.3rem;
-        margin-right: 12px;
-    }
-    .btn-text {
-        font-size: 0.9rem;
-    }
-    .btn-badge {
-        padding: 5px 12px;
-        font-size: 0.7rem;
-    }
-    .social-links {
-        gap: 20px;
-    }
-    .social-link {
-        font-size: 1.4rem;
-    }
-    .platform-title {
-        font-size: 1.4rem;
-        padding: 10px;
-    }
-}
-/* --- OPTIMIZACIÓN AGRESIVA PARA MÓVILES --- */
-@media (max-width: 768px) {
-    
-    /* 1. Desactivar animaciones de fondo pesadas */
-    body::before {
-        animation: none !important; /* Detiene el movimiento del fondo */
-        background: radial-gradient(circle at 50% 50%, rgba(255, 0, 51, 0.05), transparent 70%) !important; /* Fondo estático simple */
-    }
-
-    /* 2. Eliminar el efecto de vidrio (Backdrop Filter) - Causa mucho lag */
-    .music-activator {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: rgba(255, 0, 51, 0.95) !important; /* Color sólido un poco más opaco */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
-        animation: none !important; /* Quitar el pálpito del botón */
-    }
-
-    /* 3. Detener animaciones de sombras (Box-Shadow) en botones */
-    .download-btn, 
-    .platform-title, 
-    .btn-badge,
-    .logo {
-        animation: none !important; /* Detiene el "respiro" de las sombras */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.4) !important; /* Sombra fija y ligera */
-        transition: transform 0.2s ease !important; /* Solo animar movimiento, no sombras */
-    }
-    
-    /* 4. Simplificar el título neón */
-    .title, .adri, .cheats {
-        animation: titleColorChange 8s linear infinite !important; /* Mantenemos el color... */
-        text-shadow: 0 0 10px currentColor !important; /* ...pero simplificamos la sombra a una sola capa */
-    }
-    
-    /* 5. Optimizar iconos */
-    .activator-icon, .btn-emoji, .social-link, .fa-android, .fa-desktop {
-        animation: none !important; /* Detener movimiento constante de iconos */
-    }
-
-    /* 6. Optimización de renderizado */
-    * {
-        text-rendering: optimizeSpeed !important;
-    }
+    .title { font-size: 2.2rem; }
+    .btn-content { padding: 14px 16px; }
 }
